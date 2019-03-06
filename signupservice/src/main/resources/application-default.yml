@@ -1,0 +1,5 @@
+signup:
+  topic: signup-topic
+  topic-dlt: signup-topic.DLT
+server:
+  port: 8081
