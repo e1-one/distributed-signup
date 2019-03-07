@@ -1,6 +1,6 @@
 package com.eone.distributed.persistence.dao;
 
-import com.eone.distributed.persistence.model.SignupRecord;
+import com.eone.distributed.persistence.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SignupDao {
 
-    
+
     private JdbcTemplate jdbcTemplate;
 
     public SignupDao(@Autowired JdbcTemplate jdbcTemplate) {
@@ -27,16 +27,16 @@ public class SignupDao {
 //        jdbcTemplate.update(createTable);
 //    }
 
-    public void save(SignupRecord signupRecord) {
+    public void save(UserAccount userAccount) {
         jdbcTemplate.update("INSERT INTO signup_db.signup_table (email, password_hash, password_salt, registration_time ) VALUES (?, ?, ?, ?);",
-                signupRecord.getEmail(), signupRecord.getPasswordHash(), signupRecord.getPasswordSalt(), signupRecord.getTimestamp());
+                userAccount.getEmail(), userAccount.getPasswordHash(), userAccount.getPasswordSalt(), userAccount.getTimestamp());
     }
 
-    public SignupRecord get(String email) {
-        return (SignupRecord) jdbcTemplate.queryForObject(
+    public UserAccount get(String email) {
+        return (UserAccount) jdbcTemplate.queryForObject(
                 "SELECT email, password_hash, password_salt, registration_time from signup_db.signup_table where signup_table.email = ?",
                 new Object[]{email},
-                new BeanPropertyRowMapper(SignupRecord.class));
+                new BeanPropertyRowMapper(UserAccount.class));
     }
 
 }

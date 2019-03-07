@@ -2,8 +2,3 @@ spring:
   kafka:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-signup:
-  topic: signup-topic
-  topic-dlt: signup-topic.DLT
-server:
-  port: 8080

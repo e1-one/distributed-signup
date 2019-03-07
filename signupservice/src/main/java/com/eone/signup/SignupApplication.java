@@ -1,13 +1,13 @@
-package com.eone.distributed.persistence;
+package com.eone.signup;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class SignupApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(SignupApplication.class, args);
 	}
 
 }

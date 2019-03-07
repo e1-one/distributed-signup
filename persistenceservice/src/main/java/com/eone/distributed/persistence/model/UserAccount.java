@@ -2,7 +2,7 @@ package com.eone.distributed.persistence.model;
 
 import java.sql.Timestamp;
 
-public class SignupRecord {
+public class UserAccount {
     private String email;
     private byte[] passwordHash;
     private byte[] passwordSalt;

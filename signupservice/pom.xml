@@ -7,7 +7,7 @@
     <groupId>eone</groupId>
     <artifactId>signup-service</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>signup-service-01</name>
     <description>Distributed signup project</description>

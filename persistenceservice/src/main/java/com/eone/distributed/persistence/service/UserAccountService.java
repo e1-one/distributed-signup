@@ -1,9 +1,8 @@
 package com.eone.distributed.persistence.service;
 
-import com.eone.distributed.persistence.config.KafkaConfig;
 import com.eone.distributed.persistence.dao.SignupDao;
 import com.eone.distributed.persistence.model.SignupMessage;
-import com.eone.distributed.persistence.model.SignupRecord;
+import com.eone.distributed.persistence.model.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
-public class SignupService {
+public class UserAccountService {
 
-    private final Logger logger = LoggerFactory.getLogger(SignupService.class);
+    private final Logger logger = LoggerFactory.getLogger(UserAccountService.class);
 
     @Autowired
     private SignupDao signupDao;
@@ -25,22 +24,22 @@ public class SignupService {
     public void process(SignupMessage signupMessage){
         logger.info("Message {} is in processing", signupMessage.getTraceId());
 
-        SignupRecord signupRecord = new SignupRecord();
+        UserAccount userAccount = new UserAccount();
 
-        signupRecord.setEmail(signupMessage.getEmail());
+        userAccount.setEmail(signupMessage.getEmail());
 
         HashAndSalt hashAndSalt = passwordService.hash(signupMessage.getPassword());
-        signupRecord.setPasswordHash(hashAndSalt.getHash());
-        signupRecord.setPasswordSalt(hashAndSalt.getSalt());
+        userAccount.setPasswordHash(hashAndSalt.getHash());
+        userAccount.setPasswordSalt(hashAndSalt.getSalt());
 
-        signupRecord.setTimestamp(new Timestamp(new Date().getTime()));
+        userAccount.setTimestamp(new Timestamp(new Date().getTime()));
 
-        signupDao.save(signupRecord);
+        signupDao.save(userAccount);
     }
 
     public boolean isIdentified(SignupMessage signupMessage){
-        SignupRecord signupRecord = signupDao.get(signupMessage.getEmail());
-        HashAndSalt hashAndSalt = new HashAndSalt(signupRecord.getPasswordHash(), signupRecord.getPasswordSalt());
+        UserAccount userAccount = signupDao.get(signupMessage.getEmail());
+        HashAndSalt hashAndSalt = new HashAndSalt(userAccount.getPasswordHash(), userAccount.getPasswordSalt());
 
         return passwordService.validate(
                 signupMessage.getPassword(),

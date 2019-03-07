@@ -23,8 +23,8 @@ import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 public class KafkaConfig {
     private final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
-//    @Value("${signup.topic}")
-//    private String signupTopic;
+    @Value("${signup.topic}")
+    private String signupTopic;
 //
 //    @Value("${signup.topic-dlt}")
 //    private String signupTopicDlt;
@@ -57,16 +57,6 @@ public class KafkaConfig {
     @Bean
     public RecordMessageConverter converter() {
         return new StringJsonMessageConverter();
-    }
-
-    @KafkaListener(id = "signupGroup", topics = "signup-topic")
-    public void listen(SignupDto signupDto) {
-        logger.info("Received: " + signupDto);
-    }
-
-    @KafkaListener(id = "signUpDltGroup", topics = "signup-topic.DLT")
-    public void dltListen(String in) {
-        logger.info("Received from DLT: " + in);
     }
 
 }

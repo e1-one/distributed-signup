@@ -1,7 +1,7 @@
 package com.eone.distributed.persistence.config;
 
 import com.eone.distributed.persistence.model.SignupMessage;
-import com.eone.distributed.persistence.service.SignupService;
+import com.eone.distributed.persistence.service.UserAccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class KafkaConfig {
     private final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
     @Autowired
-    SignupService signupService;
+    UserAccountService userAccountService;
 
     @Bean
     public RecordMessageConverter converter() {
@@ -27,7 +27,7 @@ public class KafkaConfig {
     @KafkaListener(id = "signupGroup", topics = "signup-topic")
     public void listen(SignupMessage signupMessage) {
         logger.info("Received: " + signupMessage);
-        signupService.process(signupMessage);
+        userAccountService.process(signupMessage);
     }
 
     @KafkaListener(id = "signUpDltGroup", topics = "signup-topic.DLT")

@@ -13,7 +13,7 @@ public class SignupMessage {
     }
 
     public SignupMessage(SignupDto signupDto){
-        this.email = signupDto.getEmail();
+        this.email = signupDto.getEmail().trim();
         this.password = signupDto.getPassword();
     }
 

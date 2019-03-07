@@ -1,6 +1,6 @@
 package com.eone.distributed.persistence.service;
 
-import com.eone.distributed.persistence.Application;
+import com.eone.distributed.persistence.PersistenceApplication;
 import com.eone.distributed.persistence.model.SignupMessage;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +16,11 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {Application.class})
-public class SignupServiceIntegrationTest {
+        classes = {PersistenceApplication.class})
+public class UserAccountServiceIntegrationTest {
 
     @Autowired
-    private SignupService signupService;
+    private UserAccountService userAccountService;
 
     @Before
 
@@ -29,10 +29,10 @@ public class SignupServiceIntegrationTest {
         SignupMessage signupMessage = new SignupMessage();
         signupMessage.setEmail("integration-test-" + UUID.randomUUID().toString() + "@mail.com");
         signupMessage.setPassword("qwe123QWE$");
-        signupService.process(signupMessage);
+        userAccountService.process(signupMessage);
 
 
-        boolean actual = signupService.isIdentified(signupMessage);
+        boolean actual = userAccountService.isIdentified(signupMessage);
 
         assertTrue(actual);
     }
