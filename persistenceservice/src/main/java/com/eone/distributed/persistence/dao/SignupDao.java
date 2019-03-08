@@ -28,8 +28,8 @@ public class SignupDao {
 //    }
 
     public void save(UserAccount userAccount) {
-        jdbcTemplate.update("INSERT INTO signup_db.signup_table (email, password_hash, password_salt, registration_time ) VALUES (?, ?, ?, ?);",
-                userAccount.getEmail(), userAccount.getPasswordHash(), userAccount.getPasswordSalt(), userAccount.getTimestamp());
+        jdbcTemplate.update("INSERT INTO signup_db.signup_table (email, uuid, password_hash, password_salt, registration_time ) VALUES (?, ?, ?, ?, ?);",
+                userAccount.getEmail(), userAccount.getUuid(), userAccount.getPasswordHash(), userAccount.getPasswordSalt(), userAccount.getTimestamp());
     }
 
     public UserAccount get(String email) {

@@ -3,10 +3,20 @@ package com.eone.distributed.persistence.model;
 import java.sql.Timestamp;
 
 public class UserAccount {
+    private String uuid;
+
     private String email;
     private byte[] passwordHash;
     private byte[] passwordSalt;
     private Timestamp timestamp;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getEmail() {
         return email;

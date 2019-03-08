@@ -22,7 +22,7 @@ public class UserAccountService {
     private PasswordService passwordService;
 
     public void process(SignupMessage signupMessage){
-        logger.info("Message with trace_id:{} is in processing", signupMessage.getTraceId());
+        logger.info("Message with uuid_id:{} is in processing", signupMessage.getTraceId());
 
         UserAccount userAccount = new UserAccount();
 

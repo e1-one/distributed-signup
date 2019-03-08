@@ -1,6 +1,7 @@
 package com.eone.signup.controller;
 
 import com.eone.signup.model.SignupDto;
+import com.eone.signup.model.UuidDto;
 import com.eone.signup.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,9 @@ public class SignUpController {
 	private SignupService signupService;
 
 	@PostMapping
-	public String sendFoo(@RequestBody SignupDto signupDto) {
-		return signupService.process(signupDto);
+	public UuidDto signup(@RequestBody SignupDto signupDto) {
+		String uuid = signupService.process(signupDto);
+		return new UuidDto(uuid);
 	}
 
 }
