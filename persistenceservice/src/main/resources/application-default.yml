@@ -11,7 +11,5 @@ signup:
 server:
   port: 8081
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/springjdbc
-    username: guest_user
-    password: guest_password
+  kafka:
+    bootstrap-servers: localhost:9092
