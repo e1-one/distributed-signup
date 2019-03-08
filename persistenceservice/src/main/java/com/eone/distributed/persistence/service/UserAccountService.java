@@ -22,10 +22,10 @@ public class UserAccountService {
     private PasswordService passwordService;
 
     public void process(SignupMessage signupMessage){
-        logger.info("Message with uuid_id:{} is in processing", signupMessage.getTraceId());
+        logger.info("Message with uuid_id:{} is in processing", signupMessage.getUuid());
 
         UserAccount userAccount = new UserAccount();
-
+        userAccount.setUuid(signupMessage.getUuid());
         userAccount.setEmail(signupMessage.getEmail());
 
         HashAndSalt hashAndSalt = passwordService.hash(signupMessage.getPassword());

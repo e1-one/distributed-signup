@@ -4,7 +4,7 @@ public class SignupMessage {
 
     private String email;
     private String password;
-    private String traceId;
+    private String uuid;
 
     public String getEmail() {
         return email;
@@ -22,12 +22,12 @@ public class SignupMessage {
         this.password = password;
     }
 
-    public String getTraceId() {
-        return traceId;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setTraceId(String traceId) {
-        this.traceId = traceId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class SignupMessage {
         return "SignupMessage{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", traceId='" + traceId + '\'' +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

@@ -2,7 +2,6 @@ package com.eone.distributed.persistence.service;
 
 import com.eone.distributed.persistence.PersistenceApplication;
 import com.eone.distributed.persistence.model.SignupMessage;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +21,12 @@ public class UserAccountServiceIntegrationTest {
     @Autowired
     private UserAccountService userAccountService;
 
-    @Before
-
     @Test
     public void testValidation_accountIsValidated() {
         SignupMessage signupMessage = new SignupMessage();
-        signupMessage.setEmail("integration-test-" + UUID.randomUUID().toString() + "@mail.com");
+        String uuid = UUID.randomUUID().toString();
+        signupMessage.setUuid(uuid);
+        signupMessage.setEmail("integration-test-" + uuid + "@mail.com");
         signupMessage.setPassword("qwe123QWE$");
         userAccountService.process(signupMessage);
 

@@ -34,7 +34,7 @@ public class SignupDao {
 
     public UserAccount get(String email) {
         return (UserAccount) jdbcTemplate.queryForObject(
-                "SELECT email, password_hash, password_salt, registration_time from signup_db.signup_table where signup_table.email = ?",
+                "SELECT email, uuid, password_hash, password_salt, registration_time from signup_db.signup_table where signup_table.email = ?",
                 new Object[]{email},
                 new BeanPropertyRowMapper(UserAccount.class));
     }
