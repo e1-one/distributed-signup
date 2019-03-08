@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ADD target/*.jar app.jar
+COPY . .
+RUN /bin/sh -c "./mvnw clean install -DskipTests"
 ENV JAVA_OPTS=""
-ENTRYPOINT exec java $JAVA_OPTS -jar /app.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar target/*.jar
