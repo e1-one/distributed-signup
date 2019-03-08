@@ -6,6 +6,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +16,20 @@ public class SignupService {
 
     private final Logger logger = LoggerFactory.getLogger(SignupService.class);
 
+    @Value("${signup.topic}")
+    private String signupTopik;
+
     @Autowired
     private KafkaTemplate<Object, Object> template;
 
     @Autowired
     private PasswordValidator passwordValidator;
 
-/*    @Value("${signup.topic}")
-    private String signupTopik;*/
 
     public String process(SignupDto signupDto){
         if(isValidSignupInput(signupDto)){
             SignupMessage message = new SignupMessage(signupDto);
-            template.send("signup-topic", message);
+            template.send(signupTopik, message);
             return message.getUuid();
         }
         throw new IllegalArgumentException("Signup input is not valid");
@@ -38,4 +40,5 @@ public class SignupService {
         boolean passValid = passwordValidator.validate(signupDto.getPassword());
         return emailValid && passValid;
     }
+
 }

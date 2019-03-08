@@ -25,9 +25,9 @@ public class KafkaConfig {
 
     @Value("${signup.topic}")
     private String signupTopic;
-//
-//    @Value("${signup.topic-dlt}")
-//    private String signupTopicDlt;
+
+    @Value("${signup.topic-dlt}")
+    private String signupTopicDlt;
 
     @Autowired
     Environment environment;
@@ -46,12 +46,12 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic topic() {
-        return new NewTopic("signup-topic", 1, (short) 1);
+        return new NewTopic(signupTopic, 1, (short) 1);
     }
 
     @Bean
     public NewTopic dlt() {
-        return new NewTopic("signup-topic.DLT", 1, (short) 1);
+        return new NewTopic(signupTopicDlt, 1, (short) 1);
     }
 
     @Bean
